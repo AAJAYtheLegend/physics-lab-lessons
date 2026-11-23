@@ -1,0 +1,178 @@
+<meta name="robots" content="noindex, nofollow">
+<title>Physics Lab Interactive Lesson</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  @font-face { font-family: 'CHULALONGKORN'; src: url(fonts/CHULALONGKORN-Regular.otf) format('opentype'); font-weight: 100 499; font-display: swap; ascent-override: 92%; descent-override: 38%; line-gap-override: 0%; }
+  @font-face { font-family: 'CHULALONGKORN'; src: url(fonts/CHULALONGKORN-Bold.otf) format('opentype'); font-weight: 500 900; font-display: swap; ascent-override: 92%; descent-override: 38%; line-gap-override: 0%; }
+  /* Layout: a hero band where pink light (left) and one sky-to-deep-blue cloud (right) bleed through and
+     past a frosted-glass panel (small top row, staggered headline, pill button, ruled facts row), a gear for
+     theme and language; then the four lab families as glass panels, each a gallery of picture cards.
+     Light and dark follow the device unless the gear picks one; the setting is shared with the lab pages. */
+  :root { --bg: #f5f5f7; --card: rgba(255,255,255,.6); --edge: rgba(255,255,255,.8); --row: rgba(255,255,255,.92); --ink: #1d1d1f; --muted: #5f5f66; --line: rgba(0,0,0,.09); --accent: #0066d6; --chip: rgba(0,0,0,.06); --shadow: 0 8px 32px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05); --glow: .55; --h-card: linear-gradient(180deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.36) 50%, rgba(255,255,255,.22) 100%); --h-ink: #111114; --h-muted: rgba(17,17,20,.66); --h-edge: rgba(255,255,255,.85); --h-line: rgba(17,17,20,.22); --h-shadow: 0 30px 70px rgba(40,60,120,.18); --cta-bg: #111114; --cta-ink: #fff; --k: #0b4fc4; --pop: #ffffff; color-scheme: light;
+    --pink: #ff3d9a; --font: 'CHULALONGKORN', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #07070a; --card: rgba(30,30,36,.55); --edge: rgba(255,255,255,.10); --row: rgba(40,40,48,.66); --ink: #f2f2f7; --muted: #a1a1a6; --line: rgba(255,255,255,.09); --accent: #8fd3ff; --chip: rgba(255,255,255,.10); --shadow: 0 10px 36px rgba(0,0,0,.45), 0 1px 2px rgba(0,0,0,.30); --glow: 1; --h-card: linear-gradient(180deg, rgba(8,8,12,.62) 0%, rgba(8,8,12,.30) 46%, rgba(8,8,12,.16) 100%); --h-ink: #fff; --h-muted: rgba(255,255,255,.66); --h-edge: rgba(255,255,255,.16); --h-line: rgba(255,255,255,.22); --h-shadow: 0 30px 80px rgba(0,0,0,.45); --cta-bg: #fff; --cta-ink: #111; --k: #8fd3ff; --pop: #1c1c22; color-scheme: dark; } }
+  :root[data-theme="dark"] { --bg: #07070a; --card: rgba(30,30,36,.55); --edge: rgba(255,255,255,.10); --row: rgba(40,40,48,.66); --ink: #f2f2f7; --muted: #a1a1a6; --line: rgba(255,255,255,.09); --accent: #8fd3ff; --chip: rgba(255,255,255,.10); --shadow: 0 10px 36px rgba(0,0,0,.45), 0 1px 2px rgba(0,0,0,.30); --glow: 1; --h-card: linear-gradient(180deg, rgba(8,8,12,.62) 0%, rgba(8,8,12,.30) 46%, rgba(8,8,12,.16) 100%); --h-ink: #fff; --h-muted: rgba(255,255,255,.66); --h-edge: rgba(255,255,255,.16); --h-line: rgba(255,255,255,.22); --h-shadow: 0 30px 80px rgba(0,0,0,.45); --cta-bg: #fff; --cta-ink: #111; --k: #8fd3ff; --pop: #1c1c22; color-scheme: dark; }
+  :root:not([data-lang="th"]) .lg-th { display: none; } :root[data-lang="th"] .lg-en { display: none; }
+  /* the host page around an artifact paints its own background; ours must win */
+  html { background: var(--bg) !important; }
+  body { margin: 0; background: transparent !important; color: var(--ink); font: 300 15px/1.55 var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  html::before { content: ""; position: fixed; inset: -10%; z-index: -1; pointer-events: none; filter: blur(60px); opacity: var(--glow);
+    background: radial-gradient(30% 30% at 6% 70%, rgba(255,61,154,.20), transparent 70%), radial-gradient(34% 34% at 94% 62%, rgba(47,123,255,.22), transparent 70%); }
+
+  /* ---- hero ---- */
+  .band { position: relative; isolation: isolate; padding: 40px max(16px, env(safe-area-inset-right, 0px)) 56px max(16px, env(safe-area-inset-left, 0px)); overflow: hidden; }
+  .bleed { position: absolute; inset: -12% -8%; z-index: -1; filter: blur(46px) saturate(1.15); pointer-events: none;
+    -webkit-mask-image: linear-gradient(#000 52%, transparent 88%); mask-image: linear-gradient(#000 52%, transparent 88%);
+    background:
+      radial-gradient(36% 46% at 20% 52%, var(--pink) 0%, rgba(255,61,154,.62) 40%, transparent 74%),
+      radial-gradient(20% 24% at 8% 20%, rgba(255,140,198,.7) 0%, transparent 70%),
+      radial-gradient(48% 62% at 74% 50%, #9edcff 0%, #5fb4ff 20%, #2f7bff 42%, #1b4fd6 60%, rgba(18,50,170,.5) 72%, transparent 84%); }
+  .hero { position: relative; max-width: 1000px; margin: 0 auto; color: var(--h-ink); border-radius: 22px; overflow: visible;
+    background: var(--h-card); border: 1px solid var(--h-edge); box-shadow: var(--h-shadow), inset 0 1px 0 var(--h-edge);
+    -webkit-backdrop-filter: blur(18px) saturate(1.3); backdrop-filter: blur(18px) saturate(1.3); }
+  .hero-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 16px; padding: 18px 64px 0 22px; font-size: 11px; line-height: 1.5; letter-spacing: .02em; }
+  .hero-top b { font-weight: 500; font-size: 12.5px; }
+  .hero-top a, .hero-top > div > span { display: block; color: var(--h-muted); text-decoration: none; text-transform: uppercase; }
+  .hero-top a:hover { color: var(--h-ink); }
+  .hero-top .on { color: var(--h-ink) !important; } .hero-top .on::before { content: "• "; }
+  h1 { margin: 0; padding: clamp(36px, 9vw, 92px) 22px 0; font-weight: 300; font-size: clamp(36px, 7.4vw, 72px); line-height: 1.08; letter-spacing: -.02em; }
+  h1 .ln { display: block; } h1 .l2 { padding-left: 38%; } h1 .l3 { padding-left: 22%; }
+  .cta { display: inline-flex; align-items: center; gap: 12px; margin: 26px 0 0 22%; transform: translateX(22px); padding: 8px 8px 8px 18px; border-radius: 999px; background: var(--cta-bg); color: var(--cta-ink);
+    font-size: 13px; font-weight: 500; text-decoration: none; box-shadow: 0 8px 24px rgba(0,0,0,.22); }
+  .cta i { font-style: normal; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--cta-ink); color: var(--cta-bg); font-size: 13px; }
+  .rule { position: relative; margin: clamp(40px, 8vw, 84px) 22px 0; border-top: 1px solid var(--h-line); }
+  .rule::before, .rule::after { content: "×"; position: absolute; top: -10px; font-size: 12px; color: var(--h-muted); }
+  .rule::before { left: -14px; } .rule::after { right: -14px; }
+  .facts { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 16px; padding: 14px 22px 22px; font-size: 11.5px; color: var(--h-muted); }
+  .facts b { display: block; color: var(--h-ink); font-weight: 500; font-size: 13px; }
+  .facts .k { color: var(--k); }
+  /* gear: theme and language, same setting as the lab pages */
+  .gear { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--h-edge); background: var(--h-card); color: var(--h-ink); display: grid; place-items: center; cursor: pointer; }
+  .gear svg { width: 19px; height: 19px; fill: currentColor; }
+  #settings { position: absolute; z-index: 5; top: 54px; right: 12px; width: min(260px, calc(100vw - 56px)); padding: 14px; display: flex; flex-direction: column; gap: 12px; color: var(--ink);
+    background: var(--pop); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 16px 40px rgba(0,0,0,.25); isolation: isolate; }
+  #settings[hidden] { display: none; }
+  #settings h4 { margin: 0 0 6px; font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .seg { display: flex; gap: 2px; padding: 3px; background: var(--chip); border-radius: 10px; }
+  .seg button { flex: 1 1 0; font: 400 13px var(--font); padding: 5px 8px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); cursor: pointer; }
+  .seg button.on { background: var(--row); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.14); }
+
+  /* ---- lab families ---- */
+  .wrap { max-width: 1000px; margin: 0 auto; padding-block: 8px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 22px; }
+  .glass { background: var(--card); border: 1px solid var(--edge); border-radius: 18px; box-shadow: var(--shadow), inset 0 1px 0 var(--edge);
+    -webkit-backdrop-filter: blur(24px) saturate(1.8); backdrop-filter: blur(24px) saturate(1.8); }
+  section { padding: 18px; scroll-margin-top: 16px; }
+  h2 { font-size: clamp(20px, 4.6vw, 24px); font-weight: 500; line-height: 1.25; margin: 0 0 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+  h2 .alt { font-size: 15px; font-weight: 300; color: var(--muted); }
+  ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+  a.lab { display: flex; flex-direction: column; height: 100%; background: var(--row); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; color: inherit; text-decoration: none; transition: border-color .15s, transform .15s, box-shadow .15s; }
+  a.lab:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+  a.lab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .pic { display: block; aspect-ratio: 16 / 10; background: #fff; border-bottom: 1px solid var(--line); }
+  .pic img { display: block; width: 100%; height: 100%; object-fit: contain; padding: 6px; box-sizing: border-box; }
+  .meta { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px 14px; }
+  .code { flex: 0 0 auto; font-size: 12.5px; font-weight: 500; color: var(--ink); background: var(--chip); border-radius: 7px; padding: 2px 8px; }
+  .name { min-width: 0; } .name b { display: block; font-weight: 500; line-height: 1.35; }
+  .name small { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+  footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; padding: 16px 18px; }
+  footer p { margin: 0; max-width: 65ch; }
+  @media (max-width: 720px) {
+    .hero-top { grid-template-columns: 1fr 1fr; } .hero-top > div:nth-child(n+3) { display: none; }
+    h1 .l2 { padding-left: 18%; } h1 .l3 { padding-left: 8%; } .cta { margin-left: 8%; }
+    .facts { grid-template-columns: 1fr 1fr; row-gap: 14px; } .facts > div:first-child { grid-column: 1 / -1; } }
+  @media (prefers-reduced-motion: reduce) { a.lab { transition: none; } }
+</style>
+
+<div class="band">
+  <div class="bleed" aria-hidden="true"></div>
+  <header class="hero">
+    <div class="hero-top">
+      <div><b>Physics 01420113</b></div>
+      <div><a class="on" href="#mech"><span class="lg-en">Mechanics</span><span class="lg-th" lang="th">กลศาสตร์</span></a><a href="#fluids"><span class="lg-en">Fluids</span><span class="lg-th" lang="th">ของไหล</span></a></div>
+      <div><a href="#heat"><span class="lg-en">Heat</span><span class="lg-th" lang="th">ความร้อน</span></a><a href="#waves"><span class="lg-en">Waves</span><span class="lg-th" lang="th">คลื่น</span></a></div>
+      <div><span class="on"><span class="lg-en">Lab exam</span><span class="lg-th" lang="th">ฝึกสอบ</span></span><span><span class="lg-en">practice</span><span class="lg-th" lang="th">แล็บ</span></span></div>
+    </div>
+    <button class="gear" id="gear" type="button" aria-label="Settings" aria-expanded="false" aria-controls="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.3 7.3 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.3 7.3 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.3 7.3 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.3 7.3 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5A3.5 3.5 0 1 1 13 8.5a3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg></button>
+    <div id="settings" hidden role="dialog" aria-label="Settings">
+      <div><h4><span class="lg-en">Language</span><span class="lg-th" lang="th">ภาษา</span></h4><div class="seg" id="langSeg"><button type="button" data-lang="en">EN</button><button type="button" data-lang="th">TH</button></div></div>
+      <div><h4><span class="lg-en">Appearance</span><span class="lg-th" lang="th">ธีม</span></h4><div class="seg" id="themeSeg"><button type="button" data-theme="light"><span class="lg-en">Light</span><span class="lg-th" lang="th">สว่าง</span></button><button type="button" data-theme="dark"><span class="lg-en">Dark</span><span class="lg-th" lang="th">มืด</span></button><button type="button" data-theme="auto"><span class="lg-en">Auto</span><span class="lg-th" lang="th">อัตโนมัติ</span></button></div></div>
+    </div>
+    <h1><span class="ln">Physics Lab</span><span class="ln l2">Interactive</span><span class="ln l3">Lesson</span></h1>
+    <a class="cta" href="#mech"><span class="lg-en">Start with the labs</span><span class="lg-th" lang="th">เริ่มเลย</span> <i>→</i></a>
+    <div class="rule"></div>
+    <div class="facts">
+      <div><b><span class="lg-en">One page per lab</span><span class="lg-th" lang="th">หนึ่งหน้าต่อหนึ่งการทดลอง</span></b><span class="lg-en">Record sheet cell by cell, a walk-through from an empty bench, the steps, and worked sums with calculator keys.</span><span class="lg-th" lang="th">ใบบันทึกทีละช่อง การเดินดูจากโต๊ะว่าง ขั้นตอน และวิธีคำนวณพร้อมปุ่มเครื่องคิดเลข</span></div>
+      <div><b class="k">12</b><span class="lg-en">labs</span><span class="lg-th" lang="th">การทดลอง</span></div>
+      <div><b class="k">4</b><span class="lg-en">lab families</span><span class="lg-th" lang="th">หมวด</span></div>
+      <div><b class="k">EN · TH</b><span class="lg-en">two languages</span><span class="lg-th" lang="th">สองภาษา</span></div>
+    </div>
+  </header>
+</div>
+
+<div class="wrap">
+  <section class="glass" id="mech">
+    <h2><span class="lg-en">Mechanics</span><span class="lg-th" lang="th">กลศาสตร์</span> <span class="alt"><span class="lg-en">กลศาสตร์</span><span class="lg-th" lang="th">Mechanics</span></span></h2>
+    <ol>
+      <li><a class="lab" href="m1.html"><span class="pic"><img src="assets/thumbs/m1.jpg" alt="" loading="lazy" width="640" height="360"></span><span class="meta"><span class="code">M-1</span><span class="name"><b>Principles of Measurement</b><small><span class="lg-en">Ruler readings, uncertainty, area and volume</span><span class="lg-th" lang="th">อ่านไม้บรรทัด ความไม่แน่นอน พื้นที่และปริมาตร</span></small></span></span></a></li>
+      <li><a class="lab" href="m2.html"><span class="pic"><img src="assets/thumbs/m2.jpg" alt="" loading="lazy" width="640" height="360"></span><span class="meta"><span class="code">M-2</span><span class="name"><b>Precision Measuring Instruments</b><small><span class="lg-en">Vernier caliper, micrometer, spherometer</span><span class="lg-th" lang="th">เวอร์เนียคาลิปเปอร์ ไมโครมิเตอร์ สเฟียโรมิเตอร์</span></small></span></span></a></li>
+      <li><a class="lab" href="m3.html"><span class="pic"><img src="assets/thumbs/m3.jpg" alt="" loading="lazy" width="640" height="360"></span><span class="meta"><span class="code">M-3</span><span class="name"><b>Kinematics and Dynamics of 1-D Motion</b><small><span class="lg-en">Air track, photogates, graph slope</span><span class="lg-th" lang="th">รางลม โฟโตเกต ความชันของกราฟ</span></small></span></span></a></li>
+      <li><a class="lab" href="m4.html"><span class="pic"><img src="assets/thumbs/m4.jpg" alt="" loading="lazy" width="640" height="360"></span><span class="meta"><span class="code">M-4</span><span class="name"><b>Centripetal Force and Moment of Inertia</b><small><span class="lg-en">Rotating system of particles</span><span class="lg-th" lang="th">ระบบอนุภาคที่หมุน</span></small></span></span></a></li>
+      <li><a class="lab" href="m5.html"><span class="pic"><img src="assets/thumbs/m5.jpg" alt="" loading="lazy" width="640" height="360"></span><span class="meta"><span class="code">M-5</span><span class="name"><b>Physical Pendulum</b><small><span class="lg-en">Swing periods, moment of inertia</span><span class="lg-th" lang="th">คาบการแกว่ง โมเมนต์ความเฉื่อย</span></small></span></span></a></li>
+      <li><a class="lab" href="m6.html"><span class="pic"><img src="assets/thumbs/m6.jpg" alt="" loading="lazy" width="640" height="360"></span><span class="meta"><span class="code">M-6</span><span class="name"><b>Young's Modulus of Metal Wire</b><small><span class="lg-en">Micrometer, dial gauge, stress and strain</span><span class="lg-th" lang="th">ไมโครมิเตอร์ ไดอัลเกจ ความเค้นและความเครียด</span></small></span></span></a></li>
+      <li><a class="lab" href="m7.html"><span class="pic"><img src="assets/thumbs/m7.jpg" alt="" loading="lazy" width="640" height="360"></span><span class="meta"><span class="code">M-7</span><span class="name"><b>Momentum and Collision</b><small><span class="lg-en">Gliders, photogates, momentum and energy</span><span class="lg-th" lang="th">รถเลื่อน โฟโตเกต โมเมนตัมและพลังงาน</span></small></span></span></a></li>
+    </ol>
+  </section>
+
+  <section class="glass" id="fluids">
+    <h2><span class="lg-en">Fluids</span><span class="lg-th" lang="th">ของไหล</span> <span class="alt"><span class="lg-en">ของไหล</span><span class="lg-th" lang="th">Fluids</span></span></h2>
+    <ol>
+      <li><a class="lab" href="hy1.html"><span class="pic"><img src="assets/thumbs/hy1.jpg" alt="" loading="lazy" width="640" height="360"></span><span class="meta"><span class="code">Hy-1</span><span class="name"><b>Surface Tension of Liquids</b><small><span class="lg-en">Ring and straight wire, Jolly balance</span><span class="lg-th" lang="th">วงแหวนและลวดตรง เครื่องชั่งจอลลี</span></small></span></span></a></li>
+      <li><a class="lab" href="hy2.html"><span class="pic"><img src="assets/thumbs/hy2.jpg" alt="" loading="lazy" width="640" height="360"></span><span class="meta"><span class="code">Hy-2</span><span class="name"><b>Liquids Viscosity</b><small><span class="lg-en">Falling balls, Stokes' law</span><span class="lg-th" lang="th">ลูกบอลตก กฎของสโตกส์</span></small></span></span></a></li>
+    </ol>
+  </section>
+
+  <section class="glass" id="heat">
+    <h2><span class="lg-en">Heat</span><span class="lg-th" lang="th">ความร้อน</span> <span class="alt"><span class="lg-en">ความร้อน</span><span class="lg-th" lang="th">Heat</span></span></h2>
+    <ol>
+      <li><a class="lab" href="h1.html"><span class="pic"><img src="assets/thumbs/h1.jpg" alt="" loading="lazy" width="640" height="360"></span><span class="meta"><span class="code">H-1</span><span class="name"><b>Coefficient of Linear Expansion of Metals</b><small><span class="lg-en">Steam-heated tubes, dial gauge</span><span class="lg-th" lang="th">ท่อโลหะร้อนด้วยไอน้ำ ไดอัลเกจ</span></small></span></span></a></li>
+    </ol>
+  </section>
+
+  <section class="glass" id="waves">
+    <h2><span class="lg-en">Waves</span><span class="lg-th" lang="th">คลื่น</span> <span class="alt"><span class="lg-en">คลื่น</span><span class="lg-th" lang="th">Waves</span></span></h2>
+    <ol>
+      <li><a class="lab" href="w1.html"><span class="pic"><img src="assets/thumbs/w1.jpg" alt="" loading="lazy" width="640" height="360"></span><span class="meta"><span class="code">W-1</span><span class="name"><b>Standing Waves on a String</b><small><span class="lg-en">Loops, tension, linear mass density</span><span class="lg-th" lang="th">จำนวนลูป แรงตึง มวลต่อความยาว</span></small></span></span></a></li>
+      <li><a class="lab" href="w2.html"><span class="pic"><img src="assets/thumbs/w2.jpg" alt="" loading="lazy" width="640" height="360"></span><span class="meta"><span class="code">W-2</span><span class="name"><b>Speed of Sound in Metal</b><small><span class="lg-en">Kundt's tube, cork-dust piles</span><span class="lg-th" lang="th">หลอดคุนท์ กองผงไม้ก๊อก</span></small></span></span></a></li>
+    </ol>
+  </section>
+
+  <footer class="glass">
+    <p><span class="lg-en">Practice numbers on these pages are examples. They are not real results, and they are not a classmate's answers.</span><span class="lg-th" lang="th">ตัวเลขในหน้าเหล่านี้เป็นตัวอย่างสำหรับฝึก ไม่ใช่ผลจริง และไม่ใช่คำตอบของเพื่อน</span></p>
+    <p><span class="lg-en">Where the manual prints no formula or value, the page says so. Check those points with your lecturer.</span><span class="lg-th" lang="th">ถ้าคู่มือไม่ได้พิมพ์สูตรหรือค่าไว้ หน้าเว็บจะบอกไว้ ให้ถามอาจารย์ในจุดนั้น</span></p>
+    <p lang="th">ภาษาไทยผิดเพี้ยนขออภัย งานรีบ</p>
+  </footer>
+</div>
+
+<script>
+  // Theme and language, stored under the same key as the lab pages, so one choice applies everywhere.
+  (() => {
+    const root = document.documentElement, PREF = 'lab-explainer-prefs';
+    let prefs = { lang: 'en', theme: 'auto' };
+    try { prefs = { ...prefs, ...JSON.parse(localStorage.getItem(PREF) || '{}') }; } catch (e) {}
+    const $$ = (s) => [...document.querySelectorAll(s)];
+    const apply = () => {
+      root.dataset.lang = prefs.lang; root.lang = prefs.lang;
+      if (prefs.theme === 'auto') delete root.dataset.theme; else root.dataset.theme = prefs.theme;
+      for (const b of $$('#langSeg button')) b.classList.toggle('on', b.dataset.lang === prefs.lang);
+      for (const b of $$('#themeSeg button')) b.classList.toggle('on', b.dataset.theme === prefs.theme);
+      try { localStorage.setItem(PREF, JSON.stringify(prefs)); } catch (e) {}
+    };
+    apply();
+    for (const b of $$('#langSeg button')) b.onclick = () => { prefs.lang = b.dataset.lang; apply(); };
+    for (const b of $$('#themeSeg button')) b.onclick = () => { prefs.theme = b.dataset.theme; apply(); };
+    const gear = document.getElementById('gear'), box = document.getElementById('settings');
+    gear.onclick = (e) => { e.stopPropagation(); box.hidden = !box.hidden; gear.setAttribute('aria-expanded', String(!box.hidden)); };
+    document.addEventListener('click', (e) => { if (!box.hidden && !box.contains(e.target) && e.target !== gear) { box.hidden = true; gear.setAttribute('aria-expanded', 'false'); } });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { box.hidden = true; gear.setAttribute('aria-expanded', 'false'); } });
+  })();
+</script>
