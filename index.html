@@ -81,7 +81,7 @@
   footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; padding: 16px 18px; }
   footer p { margin: 0; max-width: 65ch; }
   @media (max-width: 720px) {
-    .hero-top { grid-template-columns: 1fr 1fr; } .hero-top > div:nth-child(n+3) { display: none; }
+    .hero-top { grid-template-columns: 1fr 1fr; row-gap: 10px; } .hero-top > div:first-child { grid-column: 1 / -1; } .hero-top > div:nth-child(4) { display: none; }
     h1 .l2 { padding-left: 18%; } h1 .l3 { padding-left: 8%; } .cta { margin-left: 8%; }
     .facts { grid-template-columns: 1fr 1fr; row-gap: 14px; } .facts > div:first-child { grid-column: 1 / -1; } }
   @media (prefers-reduced-motion: reduce) { a.lab { transition: none; } }
