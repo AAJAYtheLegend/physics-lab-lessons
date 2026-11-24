@@ -25,17 +25,32 @@
 
   /* ---- hero ---- */
   .band { position: relative; isolation: isolate; padding: 40px max(16px, env(safe-area-inset-right, 0px)) 56px max(16px, env(safe-area-inset-left, 0px)); overflow: hidden; }
-  .bleed { position: absolute; inset: -12% -8%; z-index: -1; filter: blur(46px) saturate(1.15); pointer-events: none;
-    -webkit-mask-image: linear-gradient(#000 52%, transparent 88%); mask-image: linear-gradient(#000 52%, transparent 88%);
-    background:
-      radial-gradient(36% 46% at 20% 52%, var(--pink) 0%, rgba(255,61,154,.62) 40%, transparent 74%),
-      radial-gradient(20% 24% at 8% 20%, rgba(255,140,198,.7) 0%, transparent 70%),
-      radial-gradient(48% 62% at 74% 50%, #9edcff 0%, #5fb4ff 20%, #2f7bff 42%, #1b4fd6 60%, rgba(18,50,170,.5) 72%, transparent 84%); }
+  .bleed { position: absolute; inset: -12% -8%; z-index: -1; pointer-events: none; overflow: hidden;
+    -webkit-mask-image: linear-gradient(#000 52%, transparent 88%); mask-image: linear-gradient(#000 52%, transparent 88%); }
+  /* the light: soft blobs, each drifting, stretching and turning on its own slow loop, so the cloud keeps changing shape.
+     Only transform is animated (cheap on phones); the softness is in the gradients, not a live blur. */
+  .blob { position: absolute; border-radius: 50%; will-change: transform; animation: var(--anim) ease-in-out infinite alternate; }
+  .b1 { left: -2%; top: 18%; width: 46%; height: 72%; --anim: drift1 23s;
+    background: radial-gradient(closest-side, var(--pink) 0%, rgba(255,61,154,.62) 42%, rgba(255,61,154,.18) 72%, transparent 100%); }
+  .b2 { left: -6%; top: -8%; width: 30%; height: 46%; --anim: drift2 29s;
+    background: radial-gradient(closest-side, rgba(255,140,198,.75) 0%, rgba(255,140,198,.25) 60%, transparent 100%); }
+  .b3 { left: 44%; top: 2%; width: 62%; height: 96%; --anim: drift3 27s;
+    background: radial-gradient(closest-side, #9edcff 0%, #5fb4ff 22%, #2f7bff 46%, #1b4fd6 66%, rgba(18,50,170,.35) 84%, transparent 100%); }
+  .b4 { left: 70%; top: 40%; width: 40%; height: 60%; --anim: drift4 31s;
+    background: radial-gradient(closest-side, rgba(120,190,255,.7) 0%, rgba(47,123,255,.35) 55%, transparent 100%); }
+  .b5 { left: 26%; top: 30%; width: 34%; height: 50%; --anim: drift5 37s; opacity: .7;
+    background: radial-gradient(closest-side, rgba(200,120,255,.55) 0%, rgba(140,110,255,.2) 60%, transparent 100%); }
+  @keyframes drift1 { 0% { transform: translate(0,0) rotate(0deg) scale(1,1); } 50% { transform: translate(9%,-7%) rotate(25deg) scale(1.25,.85); } 100% { transform: translate(-5%,8%) rotate(-15deg) scale(.9,1.2); } }
+  @keyframes drift2 { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(22%,14%) scale(1.3,.9); } 100% { transform: translate(8%,30%) scale(.85,1.15); } }
+  @keyframes drift3 { 0% { transform: translate(0,0) rotate(0deg) scale(1,1); } 50% { transform: translate(-10%,6%) rotate(-20deg) scale(.85,1.2); } 100% { transform: translate(6%,-6%) rotate(18deg) scale(1.2,.9); } }
+  @keyframes drift4 { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(-30%,-25%) scale(1.25,.8); } 100% { transform: translate(-12%,12%) scale(.9,1.3); } }
+  @keyframes drift5 { 0% { transform: translate(0,0) rotate(0deg) scale(1); } 50% { transform: translate(30%,-10%) rotate(40deg) scale(1.3,.8); } 100% { transform: translate(-15%,15%) rotate(-30deg) scale(.8,1.2); } }
+  @media (prefers-reduced-motion: reduce) { .blob { animation: none; } }
   .hero { position: relative; max-width: 1000px; margin: 0 auto; color: var(--h-ink); border-radius: 22px; overflow: visible;
     background: var(--h-card); border: 1px solid var(--h-edge); box-shadow: var(--h-shadow), inset 0 1px 0 var(--h-edge);
     -webkit-backdrop-filter: blur(18px) saturate(1.3); backdrop-filter: blur(18px) saturate(1.3); }
   .hero-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 16px; padding: 18px 64px 0 22px; font-size: 11px; line-height: 1.5; letter-spacing: .02em; }
-  .hero-top b { font-weight: 500; font-size: 12.5px; }
+  .hero-top b { font-weight: 500; font-size: 12.5px; } .hero-top .uni { text-transform: none; letter-spacing: .01em; }
   .hero-top a, .hero-top > div > span { display: block; color: var(--h-muted); text-decoration: none; text-transform: uppercase; }
   .hero-top a:hover { color: var(--h-ink); }
   .hero-top .on { color: var(--h-ink) !important; } .hero-top .on::before { content: "• "; }
@@ -88,10 +103,10 @@
 </style>
 
 <div class="band">
-  <div class="bleed" aria-hidden="true"></div>
+  <div class="bleed" aria-hidden="true"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b5"></i><i class="blob b3"></i><i class="blob b4"></i></div>
   <header class="hero">
     <div class="hero-top">
-      <div><b>Physics 01420113</b></div>
+      <div><b>Physics 01420113</b><span class="uni">Kasetsart University</span></div>
       <div><a class="on" href="#mech"><span class="lg-en">Mechanics</span><span class="lg-th" lang="th">กลศาสตร์</span></a><a href="#fluids"><span class="lg-en">Fluids</span><span class="lg-th" lang="th">ของไหล</span></a></div>
       <div><a href="#heat"><span class="lg-en">Heat</span><span class="lg-th" lang="th">ความร้อน</span></a><a href="#waves"><span class="lg-en">Waves</span><span class="lg-th" lang="th">คลื่น</span></a></div>
       <div><span class="on"><span class="lg-en">Lab exam</span><span class="lg-th" lang="th">ฝึกสอบ</span></span><span><span class="lg-en">practice</span><span class="lg-th" lang="th">แล็บ</span></span></div>
